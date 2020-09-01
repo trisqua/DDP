@@ -1,0 +1,23 @@
+---
+title: "Test presentation"
+author: "Amarins van de Voorde"
+date: "1-9-2020"
+output:
+  ioslides_presentation: 
+    keep_md: yes
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## First slide
+```{r, comment="", echo=TRUE}
+head(mtcars)
+```
+
+## Second slide
+```{r, echo=FALSE,fig.align='center',fig.cap="Figure"}
+plot(mtcars$wt, mtcars$mpg, xlab="Weight",ylab="MPG")
+```
