@@ -1,0 +1,29 @@
+---
+title: "Web page for Peer-graded Assignment 1"
+author: "Amarins van de Voorde"
+date: "1-9-2020"
+output: 
+  slidy_presentation: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+## Map of Utrecht city, The Netherlands
+```{r}
+library(leaflet)
+my_map<-leaflet() %>%
+  addTiles()
+my_map <- my_map %>% 
+  addMarkers(lat = 52.0837232,
+             lng = 5.1237233,
+             popup = "Utrecht, NL")
+set.seed(2020-09-01)
+df <- data.frame(lat = runif(100, min = 52.05, max = 52.15),
+                 lng = runif(100, min = 5.05, max = 5.15))
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions())
+```
+
