@@ -1,0 +1,52 @@
+---
+title: "Peer-graded Assignment week 3"
+author: "Amarins van de Voorde"
+date: "4-9-2020"
+output: 
+  ioslides_presentation: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Comparing Fuel usage per transmission type
+```{r 3rd_attempt, echo = FALSE, message = FALSE, warning = FALSE}
+library(plotly)
+mtcars$am<-as.factor(mtcars$am)
+levels(mtcars$am)<-c("Automatic","Manual")
+fig <- plot_ly( mtcars, x = ~x)
+fig <- fig %>% add_boxplot( x=~am, y=~mpg, type = "box", name = "All cyl")
+fig <- fig %>% add_boxplot( x=~am, y=~mpg, type = "box", color = ~factor(cyl), name = ~cyl, visible = F)
+fig <- fig %>% layout(
+  title = "Fuel usage per transmission type",
+  xaxis = list(title = "Transmission type"),
+  yaxis = list(title = "Fuel usage (MPG)"),
+  updatemenus = list(
+    list(type = "buttons",
+         direction = 'right',
+         xanchor = 'center',
+         yanchor = 'bottom',
+         pad = list('r'= 0, 't'= 10, 'b' = 10),
+         x = 0.5,
+         y = -0.5,
+          buttons = list(
+            
+            list(method= "restyle",
+                 args = list("visible", list(TRUE, FALSE, FALSE, FALSE)),
+                 label = "Single boxplot"),
+            
+            list(method = "restyle",
+                args = list("visible", list(F, T, T, T)),
+                label = "Boxplot per cylinder number"),
+            
+            list(method = "restyle",
+                args = list("visible", list(T, T, T, T)),
+                label = "Both")
+            
+          )))
+  )
+
+fig
+```
